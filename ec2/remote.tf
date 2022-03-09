@@ -6,11 +6,11 @@ terraform {
   }
 }
 
-data "terraform_remote_state" "vpc" {
+data "terraform_remote_state" "matiasvpc" {
     backend = "s3"
     config = {
         bucket = "matiasbuckettest"
-        key = "matiasvpc/terraform.state"
+        key = "vpc/terraform.state"
         region = "us-east-1"
     }
 }

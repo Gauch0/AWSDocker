@@ -11,7 +11,7 @@ data "aws_ami" "LinuxMatias" {
 resource "aws_instance" "EC2-MATIAS-MASTER" {
     ami = data.aws_ami.LinuxMatias.id
     instance_type = var.instance_type
-    subnet_id = data.terraform_remote_state.vpc.outputs.private-subnet
+    subnet_id = data.terraform_remote_state.matiasvpc.outputs.public-subnet
     key_name = var.key
     vpc_security_group_ids = [aws_security_group.allow_ssh_2.id]
     tags = {
@@ -22,7 +22,7 @@ resource "aws_instance" "EC2-MATIAS-MASTER" {
 resource "aws_security_group" "allow_ssh_2" {
     name = "Allow_ssh LinuxMatias"
     description = "Allows SSH inbound traffic"
-    vpc_id = data.terraform_remote_state.vpc.outputs.vpc-id
+    vpc_id = data.terraform_remote_state.matiasvpc.outputs.vpc-id
 
     ingress {
         description = "SSH FROM VPC"

@@ -1,7 +1,7 @@
 terraform {
   backend "s3"{
       bucket = "matiasbuckettest"
-      key = "matiasvpc/terraform.state"
+      key = "vpc/terraform.state"
       region = "us-east-1"
   }
 }
