@@ -18,7 +18,7 @@ resource "aws_subnet" "public-subnet-1" {
 
 resource "aws_subnet" "private-subnet-1" {
     vpc_id = aws_vpc.vpc-matiastest.id
-    cidr_block = "10.0.0.1/24"
+    cidr_block = "10.0.1.0/24"
     map_public_ip_on_launch = false
 
     tags = {
@@ -70,7 +70,7 @@ resource "aws_route_table" "private-rt" {
     vpc_id = aws_vpc.vpc-matiastest.id
     
     route{
-        cidr_block = "10.0.0.1/24"
+        cidr_block = "10.0.1.0/24"
         nat_gateway_id = aws_nat_gateway.natgw.id
     }
 
