@@ -14,8 +14,9 @@ resource "aws_instance" "EC2-MATIAS-MASTER" {
     subnet_id = data.terraform_remote_state.matiasvpc.outputs.public-subnet
     key_name = var.key
     vpc_security_group_ids = [aws_security_group.allow_ssh_2.id]
+    user_data = file("./scripts/pre.sh")
     tags = {
-      Name = "EC2-MATIAS"
+      Name = "EC2-MATIAS-MASTER"
     }
 }
 
