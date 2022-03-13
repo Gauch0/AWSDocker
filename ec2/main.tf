@@ -1,20 +1,11 @@
-data "aws_ami" "LinuxMatias" {
-  most_recent = true
-
-  filter {
-    name = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-ebs"]
-  }
-  owners = ["amazon"]
-}
 
 resource "aws_instance" "EC2-MATIAS-MASTER" {
-    ami = data.aws_ami.LinuxMatias.id
+    ami = "ami-04505e74c0741db8d"
     instance_type = var.instance_type
     subnet_id = data.terraform_remote_state.matiasvpc.outputs.public-subnet
     key_name = var.key
     vpc_security_group_ids = [aws_security_group.allow_ssh_2.id]
-    user_data = file("./scripts/pre.sh")
+    user_data              = "${file("./scripts/userdata.sh")}" 
     tags = {
       Name = "EC2-MATIAS-MASTER"
     }
@@ -94,6 +85,13 @@ resource "aws_security_group" "allow_ssh_2" {
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
+    egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
 
     tags = {
       Name = "Allow SSH 2"
