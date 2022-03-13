@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matias-api
+  labels:
+    app: myapp-api
+    type: back-end
+spec:
+  selector: 
+    matchLabels:
+        app: myapp-api
+        type: back-end
+  replicas: 3
+  template:
+    metadata:
+      name: matiasapi-pod
+      labels:
+        app: myapp-api
+        type: back-end
+    spec:
+      containers:
+      - name: matiasapi-container
+        image: gauch0/movieapi:latest
+        env:
+        - name: DB_USER
+          value: root
+        - name: DB_PASS
+          value: laralara
+        - name: DB_NAME
+          value: movie_db
+        - name: DB_HOST 
+          value: movie-db.cjwq0dyrfjz6.us-west-2.rds.amazonaws.com

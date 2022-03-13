@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matias-ui
+  labels:
+    app: myapp-ui
+    type: front-end
+spec:
+  selector: 
+    matchLabels:
+        app: myapp-ui
+        type: front-end
+  replicas: 3
+  template:
+    metadata:
+      name: matiasui-pod
+      labels:
+        app: myapp-ui
+        type: front-end
+    spec:
+      containers:
+      - name: matiasui-container
+        image: gauch0/movieui:latest
+        env:
+        - name: BACKEND_URL
+          value: "matias-service-clusterip"
+        - name: FRONTEND_PORT
+          value: "8000"
+
+
+
