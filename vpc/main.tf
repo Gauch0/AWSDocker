@@ -1,7 +1,7 @@
 resource "aws_vpc" "vpc-matiastest" {
     cidr_block = "10.0.0.0/16"
     tags = {
-        Name = "Matias-test-VPC"
+        Name = "vpc-matias-test"
         Owner = "Endava"
     }
 }

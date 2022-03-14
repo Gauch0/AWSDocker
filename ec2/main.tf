@@ -1,5 +1,5 @@
 
-resource "aws_instance" "EC2-MATIAS-MASTER" {
+resource "aws_instance" "matias-master" {
     ami = "ami-04505e74c0741db8d"
     instance_type = var.instance_type
     subnet_id = data.terraform_remote_state.matiasvpc.outputs.public-subnet
@@ -10,6 +10,18 @@ resource "aws_instance" "EC2-MATIAS-MASTER" {
       Name = "EC2-MATIAS-MASTER"
     }
 }
+
+# resource "aws_instance" "matias-worker" {
+#     ami = "ami-04505e74c0741db8d"
+#     instance_type = var.instance_type
+#     subnet_id = data.terraform_remote_state.matiasvpc.outputs.public-subnet
+#     key_name = var.key
+#     vpc_security_group_ids = [aws_security_group.allow_ssh_2.id]
+#     user_data              = "${file("./scripts/userdata.sh")}" 
+#     tags = {
+#       Name = "EC2-MATIAS-MASTER"
+#     }
+# }
 
 resource "aws_security_group" "allow_ssh_2" {
     name = "Allow_ssh LinuxMatias"

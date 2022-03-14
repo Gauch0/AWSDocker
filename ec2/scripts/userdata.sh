@@ -44,6 +44,7 @@ sudo kubeadm config images pull
 
 #GIT CLONE
 
-mkdir /home/RampUP
-cd /home/RampUP
-sudo git clone 
+mkdir /home/rampup
+cd /home/rampup
+sudo git clone https://github.com/Gauch0/AWSDocker.git k8s-docker-movieapi-movieui
+sudo chown -R rampup k8s-docker-movieapi-movieui
