@@ -2,6 +2,7 @@
 
 #UPDATE
 
+sudo apt-get upgrade
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl tree
 
@@ -42,9 +43,31 @@ sudo sysctl -p
 sudo systemctl enable kubelet
 sudo kubeadm config images pull
 
+#INSTALL MYSQL 
+
+sudo apt-get update
+mkdir /home/mysql
+cd /home/mysql
+sudo apt install mysql-server
+sudo mysql_secure_installation
+
 #GIT CLONE
 
 mkdir /home/rampup
 cd /home/rampup
 sudo git clone https://github.com/Gauch0/AWSDocker.git k8s-docker-movieapi-movieui
 sudo chown -R rampup k8s-docker-movieapi-movieui
+
+
+sudo chmod 666 /var/run/docker.sock
+
+#DOCKER CONTAINER
+docker pull gauch0/movieapi
+docker pull gauch0/movieui
+
+docker run -d --name ui -p 80:8000 gauch0/movieui
+docker run -d --name api -p 3000:3000 gauch0/movieapi
+
+
+
+
