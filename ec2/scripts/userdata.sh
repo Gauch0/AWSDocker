@@ -68,6 +68,8 @@ docker pull gauch0/movieui
 docker run -d --name ui -p 80:8000 gauch0/movieui
 docker run -d --name api -p 3000:3000 gauch0/movieapi
 
+docker run --name ddbb -p 3306:3306 -e MYSQL_ROOT_PASSWORD=laralara -e MYSQL_DATABASE=movie_db -e MYSQL_USER=root -d mysql
+
 
 
 
