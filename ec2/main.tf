@@ -5,10 +5,21 @@ resource "aws_instance" "matias-master" {
     subnet_id = data.terraform_remote_state.matiasvpc.outputs.public-subnet
     key_name = var.key
     vpc_security_group_ids = [aws_security_group.allow_ssh_2.id]
-    user_data              = "${file("./scripts/userdata.sh")}" 
+    user_data = data.template_cloudinit_config.user-data.rendered
     tags = {
       Name = "EC2-MATIAS-MASTER"
     }
+}
+
+data "template_cloudinit_config" "user-data" { 
+  part { 
+    content_type = "userdata.sh"
+    content  = file("./scripts/userdata.sh") 
+  } 
+  part { 
+    content_type = "ip.sh" 
+    content  = file("./scripts/ip.sh") 
+  } 
 }
 
 resource "aws_security_group" "allow_ssh_2" {

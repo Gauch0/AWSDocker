@@ -62,14 +62,49 @@ sudo chown -R rampup k8s-docker-movieapi-movieui
 sudo chmod 666 /var/run/docker.sock
 
 #DOCKER CONTAINER
-docker pull gauch0/movieapi
-docker pull gauch0/movieui
 
-docker run -d --name ui -p 80:8000 gauch0/movieui
-docker run -d --name api -p 3000:3000 gauch0/movieapi
+docker pull gauch0/mysql
 
-docker run --name ddbb -p 3306:3306 -e MYSQL_ROOT_PASSWORD=laralara -e MYSQL_DATABASE=movie_db -e MYSQL_USER=root -d mysql
+docker pull gauch0/uifix
 
+docker pull gauch0/apifix
 
+. ./ip.sh
+
+#MYSQL 
+
+export MYSQL_USER=admin
+
+export MYSQL_PASSWORD=laralara
+
+export MYSQL_ROOT_PASSWORD=laralara
+
+export HOST_PORT=3306
+
+export CONTAINER_NAME=bbdd
+
+export MYSQL_DATABASE=movie_db
+
+#API
+
+export DB_HOST=${myip}
+
+export DB_USER=admin
+ 
+export DB_PASS=laralara
+
+export DB_NAME=movie_db
+
+#UI
+
+export BACKEND_URL=${myip}:1000
+
+#RUN CONTAINERS
+
+docker run -it --rm --name ${CONTAINER_NAME} -p ${HOST_PORT}:3306 -e MYSQL_USER=$MYSQL_USER -e MYSQL_PASSWORD=$MYSQL_PASSWORD -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -e MYSQL_DATABASE=$MYSQL_DATABASE -d gauch0/mysql
+
+docker run -it --rm --name api -p 1000:3000 -e DB_HOST=$DB_HOST -e DB_USER=$DB_USER -e DB_PASS=$DB_PASS -e DB_NAME=$DB_NAME -d gauch0/apifix
+
+docker run -it --rm --name ui -p 80:8000 -e BACKEND_URL=$BACKEND_URL:1000 -d gauch0/uifix
 
 
