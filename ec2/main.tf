@@ -5,21 +5,10 @@ resource "aws_instance" "matias-master" {
     subnet_id = data.terraform_remote_state.matiasvpc.outputs.public-subnet
     key_name = var.key
     vpc_security_group_ids = [aws_security_group.allow_ssh_2.id]
-    user_data = data.template_cloudinit_config.user-data.rendered
+    user_data = file("./scripts/userdata.sh")
     tags = {
       Name = "EC2-MATIAS-MASTER"
     }
-}
-
-data "template_cloudinit_config" "user-data" { 
-  part { 
-    content_type = "userdata.sh"
-    content  = file("./scripts/userdata.sh") 
-  } 
-  part { 
-    content_type = "ip.sh" 
-    content  = file("./scripts/ip.sh") 
-  } 
 }
 
 resource "aws_security_group" "allow_ssh_2" {
@@ -106,12 +95,29 @@ resource "aws_security_group" "allow_ssh_2" {
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
+
+    // FOR API
+    ingress {
+      description = "API"
+      from_port = 3000
+      to_port = 3000
+      protocol = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    ingress {
+      description = "UI"
+      from_port = 8000
+      to_port = 8000
+      protocol = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
     egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
+      from_port        = 0
+      to_port          = 0
+      protocol         = "-1"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
   }
 
     tags = {
