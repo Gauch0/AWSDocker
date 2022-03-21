@@ -85,9 +85,13 @@ export BACKEND_URL=$myip:3000
 
 #RUN CONTAINERS
 
-docker run -it --rm --name ${CONTAINER_NAME} -p ${HOST_PORT}:3306 -v /home/rampup/k8s-docker-movieapi-movieui/movie-analyst-database -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -e MYSQL_DATABASE=movie_db -d mysql:latest
+docker run -it --rm --name ${CONTAINER_NAME} -p ${HOST_PORT}:3306 -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -e MYSQL_DATABASE=movie_db -d mysql:latest
 
 docker run -d --name api -p 3000:3000 -e DB_HOST=$DB_HOST -e DB_USER=$DB_USER -e DB_PASS=$DB_PASS -e DB_NAME=$DB_NAME -d gauch0/r-api
 
 docker run -d --name ui -p 80:8000 -e BACKEND_URL=$BACKEND_URL -d gauch0/r-ui
 
+cd /home/rampup/k8s-docker-movieapi-movieui/movie-analyst-database/
+
+docker exec -i bbdd -uroot -plaralara movie_db < scheme.sql
+docker exec -i bbdd -uroot -plaralara movie_db < data.sql

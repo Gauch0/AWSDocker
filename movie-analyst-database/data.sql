@@ -12,5 +12,4 @@ INSERT INTO reviewers (name, publication, avatar) VALUES ('Robert Smith', 'The D
 
 
 -- INSERT into movies (title, `release`, score, reviewer) VALUES ('NombrePelicula', 2010, 5,'NombreReviewer');
-INSERT into movies (title, `release`, score, reviewer) VALUES ('Encantadaa', 2012, 1000,'Mattias');
 INSERT INTO movies (title, `release`, score, reviewer) VALUES ('Suicide Squad', 2016, 8, 'Robert Smith'),('Batman vs. Superman', 2016, 6, 'Chris Harris'),('Captain America: Civil War', 2016, 9, 'Janet Garcia'),('Deadpool', 2016, 9, 'Andrew West'),('Avengers: Age of Ultron', 2015, 7, 'Mindy Lee'),('Ant-Man', 2015, 8, 'Martin Thomas'),('Guardians of the Galaxy', 2014, 10, 'Anthony Miller'),('Doctor Strange', 2016, 7, 'Anthony Miller'),('Superman: Homecoming', 2017, 10, 'Chris Harris'),('Wonder Woman', 2017, 8, 'Martin Thomas');
