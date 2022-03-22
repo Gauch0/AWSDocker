@@ -12,10 +12,6 @@ ENV CONTAINER_NAME $CONTAINER_NAME
 
 ENV MYSQL_DATABASE $MYSQL_DATABASE
 
-RUN mysql -U root -U movie_db -c "scheme.sql"
-
-# ADD data.sql /docker-entrypoint-initdb.d/
-
-ADD scheme.sql /docker-entrypoint-initdb.d/
+ADD . /docker-entrypoint-initdb.d/
 
 EXPOSE 3306
