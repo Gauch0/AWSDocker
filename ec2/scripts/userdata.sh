@@ -2,58 +2,89 @@
 
 # UPDATE
 
-# sudo apt-get upgrade
-# sudo apt-get update
-# sudo apt-get install -y apt-transport-https ca-certificates curl tree
+echo ",,,,,,..,,,,,**,******,,,,,,,,. ,#@%###########(##(((###(((**,,.,,,,,,*,,,,,,,**
+,,,,,,,,,***************,*,.*%@%%%%%%%%%%%%%%%%%%%%%%&&&%%%%&%((/.,,,*/.,,******
+,,,,,,,,,.,,************,.@@%%%%%%%%%%&&&&&&&&&&&%%%%%%%&&%%%%%&/,/../(*,,,,***/
+,,,,,,,,,,,************./@%&&%%%%&&%%&&&&&&&&&&&%%%%%&%%%%%%%%%&%%%(*(#.,,,**/*,
+,,,,,,,,,,,,**********,#&&&&%%%%%%&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&%%%%%%#*,.*/****
+,,,,,,,,,,..,********,&@&%%&&&%&&&&&&&&&&&&&&&&&&&&&&&&&&&&%%#%&&&%%%%@* .*/**//
+,,,,,,,,,,,,.***,/*,/@&&&&%%&&&&&&&&&&&&&&%####%%&%%%///((/*%@&&%%%&# ,***///
+,,,,,,,,,,,,.,,*//*&&&&&&&&&&&&&&&&&&&&%%#((((((//*******/*/***/&@&&@(.(#.,**//*
+,,,,,,,,,,,,... %@@&&&&&&&&&&&&&&%#((((((((/////**************//(&&&&%&@ .,,//**
+,,,,,,,,,,,,,,./%&&&&&&&&&&&&&&&&#/*///((((((//////***********//(&&&%%,,,,,///**
+**,,,,,,,,,,*.,@@@@&&&&&&&&&&&&&%,//(((((((#(#(##(((///**///(((//@@&&@(.,,******
+***,,,,,,,,,* &@@@&&&@&&&&&&&&&@(*//(((((#########((((///#%####%%&&&%&* ,*******
+***,*,,,,,,,, #&@@&&&&&%&%&&&&&*///////(((//(*/(##/***,(@&%((((#&&(..,,*/******
+****,,,,,,,,,,,,@@@&&%##%%(/&&&(*////////***//***********/#(*(%#(@@...,,,*******
+*****,,,,,,,*.(%%@&&&&(//(((#@@#,/////**********(#/*****////((/,&&@/ .,,,*******
+*//***,,,,,,,* /@@@@&&@.,**/////(((////////((((#/(/,,****(#****,@@# ..,,,,******
+*//*****,,,,,/.(%&&&&&&&@@(&/*///////(((((((#((/((/(%##%(/##/*#/ ,,,,,,,,,*,,,,,
+*///*****,,**.,&@&&&&&&&@#,*////((((((((((#%(((((((((**/((%&(#/ .,,,,,,,,,,,,,,,
+*////***,,,,*,/%@@@&&&&&@**/////((((((((//(//%.,,(*##%%&%###%/ ..,,,,,,,,,,,,,,,
+*/////**,,,,,*,,#%&@&&&((%///(((((((((((////////(/(///#(//(%, .,,,,,,,,,,,,,,,,,
+*/////***,,,,*,.#@#####&  .@#(((((((((//////////(((((((//#%...,,,,,,,,,,,,,,,,,,
+*//////**,,.*%@#(##(##((@ . ,@%(((((((//////////(((((//(% /#..,,,,,,,,,,,,,,,,,,
+*/////*,*%&%############(@  *,.&&(((((((/(///////*////%,...@*..,,,,,,,,,,,,.,,**
+*/(####((((((############%& . // (@%###########%####%%..,* /%..,.....,,,,,,.*/**
+(#(((((((((((#############%& .,,*/*,%&%%%%%%%%%#@#. .,,,,*, &*.,.....,,,,*,.*//*
+(((#(#((((((((####%((#######&*.,***//,/@&%####@/ .,,,,,,,,*./&.........,**,.,*,*
+((((((##(((((######@/((((###%(*****/////*#&%&% /%%#* .,,,,** (& .......,**,..(/*
+(######(###########%%/#######@/(((((((///, *@/ #&####%@( .,,* %% ......*/*,.,**,
+(##################(@((#####(#&*,///(((((%@%#%##((###((#&@, ,. @*.....,/(*..,***
+(#######(#(########(&#(########%./(((%(&&&@&&%############&& . ,@,,...,/(* .****
+(##########(#(######(#@(((#####%% ,,,%(*&*  #@&&%%(/(####((/@*  /%,,. *(/...//**
+(#########(##(#########(@&/(###(%#.*,,&/*#%. /@&@%%((((#####(@*  %(,. #%....(***
+"
 
-# sudo apt-get update
-# sudo apt-get install -y apt-transport-https ca-certificates curl
+sudo apt-get upgrade
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl tree
 
-# # INSTALL DOCKER
-# curl gnupg-agent software-properties-common
-# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-# sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-# sudo apt-get update
-# sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-# sudo usermod -a -G docker ubuntu
-# sudo systemctl enable docker
-# cat <<EOF >/etc/docker/daemon.json
-# {
-#   "exec-opts": ["native.cgroupdriver=systemd"],
-#   "log-driver": "json-file",
-#   "log-opts": {
-#     "max-size": "100m"
-#   },
-#   "storage-driver": "overlay2"
-# }
-# EOF
-# sudo systemctl daemon-reload
-# sudo systemctl restart docker
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
 
-# #INSTALL K8S
-# curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-# cat <<EOF >/tmp/kubernetes.list
-# deb https://apt.kubernetes.io/ kubernetes-xenial main
-# EOF
-# sudo mv /tmp/kubernetes.list /etc/apt/sources.list.d/kubernetes.list
-# sudo apt-get update
-# sudo apt-get install -y kubelet kubeadm kubectl
-# echo "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
-# sudo sysctl -p
-# sudo systemctl enable kubelet
-# sudo kubeadm config images pull
+# INSTALL DOCKER
+curl gnupg-agent software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+sudo usermod -a -G docker ubuntu
+sudo systemctl enable docker
+cat <<EOF >/etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
 
+#INSTALL DOCKER COMPOSE
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 
-# GIT CLONE
+#GIT CLONE
 
-# mkdir /home/rampup
-# cd /home/rampup
-# sudo git clone https://github.com/Gauch0/AWSDocker.git k8s-docker-movieapi-movieui
-# sudo chown -R rampup k8s-docker-movieapi-movieui
-
+mkdir /home/rampup
+cd /home/rampup
+sudo git clone https://github.com/Gauch0/AWSDocker.git k8s-docker-movieapi-movieui
+sudo chown -R rampup k8s-docker-movieapi-movieui
 
 sudo chmod 666 /var/run/docker.sock
 
+cd /home/rampup/k8s-docker-movieapi-movieui/ec2/scripts
 
-# myip=$(curl -s ifconfig.me)
+docker-compose up -d
+
+clear
+
+─────▄───▄
+─▄█▄─█▀█▀█─▄█▄
+▀▀████▄█▄████▀▀
+─────▀█▀█▀
 
