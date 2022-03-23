@@ -3,7 +3,7 @@ services:
   movie-analyst-api:
     image: gauch0/r-api
     environment:
-      - DB_HOST=${myip}
+      - DB_HOST=$myip
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
       - DB_NAME=${DB_NAME}
@@ -16,7 +16,7 @@ services:
   movie-analyst-ui:
     image: gauch0/r-ui
     environment:
-      - BACKEND_URL=${myip}:3000
+      - BACKEND_URL=$myip:3000
     container_name: ui
     ports:
       - '80:8000'

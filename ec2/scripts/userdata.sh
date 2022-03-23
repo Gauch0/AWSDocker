@@ -43,7 +43,7 @@ sudo apt-get install -y apt-transport-https ca-certificates curl tree
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl
 
-# INSTALL DOCKER
+#INSTALL DOCKER
 curl gnupg-agent software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -78,13 +78,13 @@ sudo chown -R rampup k8s-docker-movieapi-movieui
 sudo chmod 666 /var/run/docker.sock
 
 cd /home/rampup/k8s-docker-movieapi-movieui/ec2/scripts
+# cd /home/mnl/Documents/AWSDocker/ec2/scripts
 
 docker-compose up -d
 
 clear
 
-─────▄───▄
+echo = "─────▄───▄
 ─▄█▄─█▀█▀█─▄█▄
 ▀▀████▄█▄████▀▀
-─────▀█▀█▀
-
+─────▀█▀█▀"
