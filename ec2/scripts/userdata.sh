@@ -40,6 +40,8 @@ sudo chown -R rampup k8s-docker-movieapi-movieui
 sudo chmod 666 /var/run/docker.sock
 
 #EXPORT CREDENTIALS
+
+cd /home/rampup/k8s-docker-movieapi-movieui/ec2/scripts
 . ./credentials.sh
 
 #RUN CONTAINERS
