@@ -1,4 +1,8 @@
-myip=$(curl -s ifconfig.me)
+#!/bin/sh
+
+# export myip=192.168.71.128
+export myip=$(curl -s ifconfig.me)
+
 
 #MYSQL 
 
