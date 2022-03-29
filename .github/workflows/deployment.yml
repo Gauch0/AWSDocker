@@ -1,0 +1,55 @@
+name: AWS-Terraform-github-actions
+on: [push]
+
+jobs:
+  job_1-setup-credentials:
+    runs-on: ubuntu-latest
+      steps:
+      - name: Setup Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+  job_2-terraform-actions-vpc:
+    runs-on: ubuntu-latest
+    needs: job_1-setup-credentials
+      steps:
+      - uses: actions/checkout@v1
+      - name: Terraform Init vpc
+        working-directory: AWSDocker/vpc
+          run: |
+            ls -lha
+            terraform init
+  
+  job_3-terraform-actions-ec2:
+    runs-on: ubuntu-latest
+    needs: job_1-setup-credentials
+    steps:
+      - uses: actions/checkout@v1
+      - name: Terraform Init ec2
+      working-directory: AWSDocker/ec2
+      run: |
+        ls -lha
+        terraform init
+  
+  job_4-terraform-apply-vpc:
+    runs-on: ubuntu-latest
+    needs: job_2-terraform-actions-vpc
+    steps:
+      - uses: actions/checkout@v1
+      - name: terraform apply vpc
+      working-directory: AWSDocker/vpc
+      run:
+        terraform apply -auto-approve
+  
+  job_5-terraform-apply-ec2:
+    runs-on: ubuntu-latest
+    needs: job_2-terraform-actions-vpc
+    steps:
+      - uses: actions/checkout@v1
+      - name: terraform apply ec2
+      working-directory: AWSDocker/ec2
+      run:
+        terraform apply -auto-approve
