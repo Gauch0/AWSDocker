@@ -13,21 +13,39 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      - name: Terraform init
-        id: init
+      - name: Terraform init VPC
+        id: initvpc
         run: terraform init
         working-directory: ./vpc
-      - name: Terraform validate
-        id: validate
+      - name: Terraform validate VPC
+        id: validatevpc
         run: terraform validate -no-color
         working-directory: ./vpc
-      - name: Terraform Plan
-        id: plan
+      - name: Terraform Plan VPC
+        id: planvpc
         run: terraform plan -no-color
         continue-on-error: true
         working-directory: ./vpc
-      - name: Terraform Apply
-        id: apply
+      - name: Terraform Apply VPC
+        id: applyvpc
         run: terraform apply -auto-approve
         continue-on-error: true
         working-directory: ./vpc
+      - name: Terraform Init EC2
+        id: initec2
+        run: terraform init
+        working-directory: ./ec2
+      - name: Terraform validate EC2
+        id: validatec2
+        run: terraform validate -no-color
+        working-directory: ./ec2
+      - name: Terraform plan EC2
+        id: planec2
+        run: terraform plan -no-color
+        continue-on-error: true
+        working-directory: ./ec2
+      - name: Terraform Apply EC2
+        id: applyec2
+        run: terraform apply -auto-approve
+        continue-on-error: true
+        working-directory: ./ec2
