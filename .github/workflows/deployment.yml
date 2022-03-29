@@ -1,8 +1,5 @@
-name: AWS-Terraform-github-actions
-
-on:
-  push:
-    branches: [ main ]
+name: AWS-Terraform-github
+on: [push]
 
 jobs:
   build:
