@@ -4,22 +4,33 @@ on:
   push:
     branches: [ main ]
 
-env:
-  AWS_ACCESS_KEY_ID : ${{secrets.AWS_ACCESS_KEY_ID}}
-  AWS_SECRET_ACCESS_KEY : ${{secrets.AWS_SECRET_ACCESS_KEY}}
-
 jobs:
-  jobs_terraform_version:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-20.04
     steps:
-     - uses: actions/checkout@v1
-     - name: Verificar la version de terraform
-       run: terraform --version 
-  
-  jobs_terraform_init:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Inicializa terraform en VPC
-      working-directory: AWSDocker/vpc
-      run: terraform init
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: AWS CREDENTIALS
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Terraform init
+        id: init
+        run: terraform init
+        working-directory: AWSDocker/vpc
+      - name: Terraform validate
+        id: validate
+        run: terraform validate -no-color
+        working-directory: AWSDocker/vpc
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+        continue-on-error: true
+        working-directory: AWSDocker/vpc
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -auto-approve
+        continue-on-error: true
+        working-directory: AWSDocker/vpc
