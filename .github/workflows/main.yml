@@ -49,3 +49,16 @@ jobs:
         run: terraform apply -auto-approve
         continue-on-error: true
         working-directory: ./ec2
+      - name: Sleep for 30 seconds
+        run: sleep 120s
+        shell: bash
+      - name: Terraform Destroy EC2
+        id: destroyec2
+        run: terraform destroy -auto-approve
+        continue-on-error: true
+        working-directory: ./ec2
+      - name: Terraform Destroy VPC
+        id: destroyvpc
+        run: terraform destroy -auto-approve
+        continue-on-error: true
+        working-directory: ./ec2
