@@ -7,4 +7,4 @@ Final internship project creating and containerizing a UI and API using AWS as c
 - -CI/CD: Github Actions
 - -Scripting: Bash
 - -Data Bases: MySQL
-- -Cloud Provider: AWS
+- -Cloud Provider: AWS 
